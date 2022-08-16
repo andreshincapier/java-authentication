@@ -33,13 +33,17 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) {
-        security.tokenKeyAccess("permitAll()")
+        security
+            .tokenKeyAccess("permitAll()")
             .checkTokenAccess("isAuthenticated()");
     }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory().withClient("angularapp")
+
+        clients
+            .inMemory()
+            .withClient("angularapp")
             .secret(passwordEncoder.encode("12345"))
             .scopes("read", "write")
             .authorizedGrantTypes("password", "refresh_token")
